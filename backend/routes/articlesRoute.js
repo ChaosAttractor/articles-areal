@@ -1,4 +1,11 @@
 import express from "express";
+import {
+  create,
+  findOne,
+  findAll,
+  update,
+  remove,
+} from "../controllers/articlesController.js";
 
 const router = express.Router();
 
