@@ -5,10 +5,11 @@
     >
       <thead>
         <tr class="border-b border-gray-line">
-          <th class="w-[50px] min-h-[50px] text-center pt-[15px]">ID</th>
-          <th class="w-[300px] min-h-[50px] text-left pt-[15px]">Название</th>
-          <th class="w-[300px] min-h-[50px] pt-[15px]">Содержание</th>
-          <th class="w-[50px] min-h-[50px] pt-[15px]"></th>
+          <th class="w-[50px] min-h-[50px] text-center py-[15px]">ID</th>
+          <th class="w-[300px] min-h-[50px] text-left py-[15px]">Название</th>
+          <th class="w-[300px] min-h-[50px] py-[15px]">Содержание</th>
+          <th class="w-[50px] min-h-[50px] py-[15px]">Дата</th>
+          <th class="w-[50px] min-h-[50px] py-[15px]"></th>
         </tr>
       </thead>
       <tbody>
@@ -29,6 +30,9 @@
             <p class="truncate">
               {{ article.desc }}
             </p>
+          </td>
+          <td class="px-[15px]">
+            {{ new Date(article.createdAt).toLocaleDateString() }}
           </td>
           <td>
             <button

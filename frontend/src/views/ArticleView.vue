@@ -9,5 +9,4 @@
 
 <script setup>
 import ArticleTable from "../components/ArticleTable.vue";
-import axios from "axios";
 </script>
