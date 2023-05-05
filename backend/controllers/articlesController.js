@@ -18,17 +18,19 @@ const findOne = async (req, res) => {
     const findArticle = await Articles.findOne({ where: { id: id } });
     res.status(200).json(findArticle);
   } catch (err) {
-    res.status(500).json({ message: err });
+    res.status(500).json({ message: "Не удалось найти статью" });
   }
 };
+
 const findAll = async (req, res) => {
   try {
     const findArticles = await Articles.findAll();
     res.status(200).json(findArticles);
   } catch (err) {
-    res.status(500).json({ message: err });
+    res.status(500).json({ message: "Не удалось найти все статьи" });
   }
 };
+
 const update = async (req, res) => {
   try {
     const id = req.params.id;
@@ -41,6 +43,7 @@ const update = async (req, res) => {
     res.status(404).json({ message: "Не удалось обновить статью" });
   }
 };
+
 const remove = async (req, res) => {
   try {
     const id = req.params.id;
