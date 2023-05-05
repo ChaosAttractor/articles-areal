@@ -3,6 +3,7 @@ config();
 import express from "express";
 import { router as articlesRouter } from "./routes/articlesRoute.js";
 import { router as commentsRouter } from "./routes/commentsRoute.js";
+import { router as analyticRouter } from "./routes/analyticRoute.js";
 import sequelize from "./db.js";
 import cors from "cors";
 
@@ -13,6 +14,7 @@ app.use(express.json());
 app.use(cors());
 app.use("", articlesRouter);
 app.use("/articles", commentsRouter);
+app.use("/analytic", analyticRouter);
 
 const start = async () => {
   try {
