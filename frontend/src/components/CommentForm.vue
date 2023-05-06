@@ -47,7 +47,8 @@ const v = useVuelidate(rules, {
 
 const submit = () => {
   v.value.$touch();
-  if (v.value.$error) return;
+  let errors = v.value.$errors.length;
+  if (!errors) return;
   axios
     .post(`http://localhost:5000/article/${route.params.id}/comment`, {
       text: text.value,
