@@ -15,19 +15,14 @@
       <Edit @click="edit(props.comment)" />
       <Delete @click="remove(props.comment.id)" />
     </div>
-    <Modal>
-      <EditComment />
-    </Modal>
   </div>
 </template>
 
 <script setup>
 import { useApiStore } from "../stores/apiStore";
 import { useAppStore } from "../stores/appStore";
-import EditComment from "./Edit/EditComment.vue";
 import Delete from "./UI/Delete.vue";
 import Edit from "./UI/Edit.vue";
-import Modal from "./UI/Modal.vue";
 const props = defineProps({
   comment: {
     id: Number,
@@ -42,9 +37,9 @@ const apiStore = useApiStore();
 const appStore = useAppStore();
 
 const edit = (comment) => {
-  console.log(comment);
   appStore.editComment = comment;
   appStore.showModal = true;
+  appStore.showModalComment = true;
 };
 
 const remove = (id) => {

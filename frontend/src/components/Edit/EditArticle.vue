@@ -4,10 +4,15 @@
     @submit.prevent="submit"
   >
     <Input
+      :placeholder="placeholder"
+      v-model:value="v.appStore.editArticle.title.$model"
+      class="h-[50px] w-[500px] border-b border-gray-line rounded-b-none"
+    />
+    <Input
       :type="'area'"
       :placeholder="placeholder"
-      v-model:value="v.appStore.editComment.text.$model"
-      class="h-[50px] w-[500px]"
+      v-model:value="v.appStore.editArticle.desc.$model"
+      class="min-h-[250px] w-[500px]"
     />
     <Button
       :type="'submit'"
@@ -35,15 +40,26 @@ const btnTitle = ref("Отредактировать");
 
 const rules = computed(() => ({
   appStore: {
-    editComment: {
-      text: {
+    editArticle: {
+      title: {
         minLength: helpers.withMessage(
           `Минимальная длина: 5 символов`,
           minLength(5)
         ),
         maxLength: helpers.withMessage(
-          `Максимальная длина: 600 символов`,
-          maxLength(600)
+          `Максимальная длина: 30 символов`,
+          maxLength(30)
+        ),
+        required,
+      },
+      desc: {
+        minLength: helpers.withMessage(
+          `Минимальная длина: 5 символов`,
+          minLength(5)
+        ),
+        maxLength: helpers.withMessage(
+          `Максимальная длина: 2000 символов`,
+          maxLength(2000)
         ),
         required,
       },
@@ -59,8 +75,12 @@ const submit = () => {
   v.value.$touch();
   let errors = v.value.$errors.length;
   if (errors) return;
-  apiStore.updateComment(appStore.editComment.id, appStore.editComment.text);
+  apiStore.updateArticle(
+    appStore.editArticle.id,
+    appStore.editArticle.title,
+    appStore.editArticle.desc
+  );
   appStore.showModal = false;
-  appStore.showModalComment = false;
+  appStore.showModalArticle = false;
 };
 </script>

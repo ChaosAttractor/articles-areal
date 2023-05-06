@@ -66,6 +66,25 @@ export const useApiStore = defineStore("api", () => {
       })
       .catch((err) => console.log(err));
   };
+  const updateArticle = (id, title, desc) => {
+    axios
+      .patch(`http://localhost:5000/article/${id}`, {
+        title: title,
+        desc: desc,
+      })
+      .then((res) => {
+        console.log(res);
+        getCommentsArticle();
+      })
+      .catch((err) => console.log(err));
+  };
+
+  const deleteArticle = (id) => {
+    axios
+      .delete(`http://localhost:5000/article/${id}`)
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
+  };
 
   const deleteComment = (id) => {
     axios
@@ -83,7 +102,9 @@ export const useApiStore = defineStore("api", () => {
     getArticles,
     postArticle,
     postComment,
+    updateArticle,
     updateComment,
+    deleteArticle,
     deleteComment,
   };
 });

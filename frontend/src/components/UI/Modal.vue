@@ -28,6 +28,8 @@ const apiStore = useApiStore();
 
 const close = () => {
   appStore.showModal = false;
+  appStore.showModalComment = false;
+  appStore.showModalArticle = false;
   apiStore.getCommentsArticle();
 };
 </script>
