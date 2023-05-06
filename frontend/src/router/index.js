@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router";
+import ArticleListView from "../views/ArticleListView.vue";
 import ArticleView from "../views/ArticleView.vue";
 import CreateArticleView from "../views/CreateArticleView.vue";
 
@@ -7,13 +8,15 @@ const router = createRouter({
   routes: [
     {
       path: "/",
-      name: "articlelist",
-      component: ArticleView,
+      component: ArticleListView,
     },
     {
       path: "/create",
-      name: "createArticle",
       component: CreateArticleView,
+    },
+    {
+      path: "/article/:id",
+      component: ArticleView,
     },
   ],
 });

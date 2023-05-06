@@ -21,12 +21,12 @@
           <td class="text-center">
             {{ article.id }}
           </td>
-          <td class="max-h-[100px] max-w-[300px]">
+          <td class="h-[33px] max-w-[300px] pr-[10px]">
             <p class="truncate break-words">
               {{ article.title }}
             </p>
           </td>
-          <td class="max-h-[100px] max-w-[300px] flex items-center">
+          <td class="h-[33px] max-w-[300px] flex items-center">
             <p class="truncate">
               {{ article.desc }}
             </p>
@@ -36,7 +36,7 @@
           </td>
           <td>
             <button
-              @click="info(article.id)"
+              @click="router.push({ path: `/article/${article.id}` })"
               class="flex pl-[10px]"
               title="открыть статью"
             >
@@ -60,12 +60,13 @@
 <script setup>
 import axios from "axios";
 import { ref, onMounted } from "vue";
+import { useRouter } from "vue-router";
 
+const router = useRouter();
 const articles = ref([]);
 
-const info = (e) => {
-  console.log(e);
-  //сделать потом переход по этому ивенту на пейдж со статьей и комментариями
+const open = (e) => {
+  router.push(`/article/${e}`);
 };
 
 onMounted(() => {

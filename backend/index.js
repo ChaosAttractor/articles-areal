@@ -13,7 +13,7 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 app.use("", articlesRouter);
-app.use("/articles", commentsRouter);
+app.use("/article", commentsRouter);
 app.use("/analytic", analyticRouter);
 
 const start = async () => {

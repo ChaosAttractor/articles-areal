@@ -1,7 +1,7 @@
 <template>
   <div>
     <Header />
-    <RouterView />
+    <RouterView class="bg-main min-h-[calc(100vh-50px)]" />
   </div>
 </template>
 

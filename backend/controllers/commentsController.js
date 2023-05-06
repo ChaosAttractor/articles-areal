@@ -58,10 +58,10 @@ const remove = async (req, res) => {
   try {
     const id = req.params.id;
     const commentid = req.params.commentid;
-    const updateComment = await Comments.destroy({
+    const removeComment = await Comments.destroy({
       where: { articleId: id, id: commentid },
     });
-    res.status(201).json(updateComment);
+    res.status(201).json(removeComment);
   } catch (err) {
     res
       .status(404)
