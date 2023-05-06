@@ -15,7 +15,7 @@
       <tbody>
         <tr
           class="border-b border-gray-line"
-          v-for="article in articles"
+          v-for="article in apiStore.articles"
           :key="article.id"
         >
           <td class="text-center">
@@ -36,7 +36,7 @@
           </td>
           <td>
             <button
-              @click="router.push({ path: `/article/${article.id}` })"
+              @click="router.push(`/article/${article.id}`)"
               class="flex pl-[10px]"
               title="открыть статью"
             >
@@ -58,20 +58,14 @@
 </template>
 
 <script setup>
-import axios from "axios";
-import { ref, onMounted } from "vue";
+import { onMounted } from "vue";
 import { useRouter } from "vue-router";
+import { useApiStore } from "../stores/apiStore";
 
+const apiStore = useApiStore();
 const router = useRouter();
-const articles = ref([]);
-
-const open = (e) => {
-  router.push(`/article/${e}`);
-};
 
 onMounted(() => {
-  axios
-    .get("http://localhost:5000/articles")
-    .then((res) => (articles.value = res.data));
+  apiStore.getArticles();
 });
 </script>

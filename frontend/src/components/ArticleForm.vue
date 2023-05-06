@@ -6,12 +6,12 @@
       class="w-[400px] my-[30px]"
     />
     <Input
-      :type="area"
+      :type="'area'"
       :placeholder="placeholderDesc"
       v-model:value="v.desc.$model"
       class="h-[50px] w-[400px] overflow-y-hidden"
     />
-    <Button :type="submit" :title="btnTitle" class="self-end mt-[30px]" />
+    <Button :type="'submit'" :title="btnTitle" class="self-end mt-[30px]" />
   </form>
 </template>
 
@@ -19,11 +19,12 @@
 import Input from "./UI/Input.vue";
 import Button from "./UI/Button.vue";
 import { ref, computed } from "vue";
-import axios from "axios";
 import useVuelidate from "@vuelidate/core";
-import { helpers, minLength, maxLength } from "@vuelidate/validators";
+import { helpers, minLength, maxLength, required } from "@vuelidate/validators";
+import { useApiStore } from "../stores/apiStore";
 
-const area = ref("area");
+const apiStore = useApiStore();
+
 const title = ref("");
 const desc = ref("");
 const btnTitle = ref("Опубликовать");
@@ -40,6 +41,7 @@ const rules = computed(() => ({
       `Максимальная длина: 30 символов`,
       maxLength(30)
     ),
+    required,
   },
   desc: {
     minLength: helpers.withMessage(
@@ -50,6 +52,7 @@ const rules = computed(() => ({
       `Максимальная длина: 2000 символов`,
       maxLength(2000)
     ),
+    required,
   },
 }));
 
@@ -61,20 +64,9 @@ const v = useVuelidate(rules, {
 const submit = () => {
   v.value.$touch();
   let errors = v.value.$errors.length;
-  if (!errors) return;
-  axios
-    .post("http://localhost:5000/article", {
-      title: title.value,
-      desc: desc.value,
-    })
-    .then((res) => {
-      title.value = "";
-      desc.value = "";
-      console.log(res);
-      //сделать компонент уведомлений и отсылать туда инфу по сабмиту
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+  if (errors) return;
+  apiStore.postArticle(title, desc);
+  title.value = "";
+  desc.value = "";
 };
 </script>

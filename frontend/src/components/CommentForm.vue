@@ -4,12 +4,12 @@
     @submit.prevent="submit"
   >
     <Input
-      :type="area"
+      :type="'area'"
       :placeholder="placeholder"
       v-model:value="v.text.$model"
       class="h-[50px] w-[500px]"
     />
-    <Button :type="submit" :title="btnTitle" />
+    <Button :type="'submit'" :title="btnTitle" />
   </form>
 </template>
 
@@ -17,15 +17,14 @@
 import Input from "./UI/Input.vue";
 import Button from "./UI/Button.vue";
 import { ref, computed } from "vue";
-import { useRoute } from "vue-router";
 import useVuelidate from "@vuelidate/core";
-import { helpers, minLength, maxLength } from "@vuelidate/validators";
-import axios from "axios";
+import { helpers, minLength, maxLength, required } from "@vuelidate/validators";
+import { useApiStore } from "../stores/apiStore";
 
-const route = useRoute();
+const apiStore = useApiStore();
+
 const text = ref("");
 const placeholder = ref("Напишите комментарий...");
-const area = ref("area");
 const btnTitle = ref("Отправить");
 
 const rules = computed(() => ({
@@ -38,6 +37,7 @@ const rules = computed(() => ({
       `Максимальная длина: 600 символов`,
       maxLength(600)
     ),
+    required,
   },
 }));
 
@@ -48,18 +48,8 @@ const v = useVuelidate(rules, {
 const submit = () => {
   v.value.$touch();
   let errors = v.value.$errors.length;
-  if (!errors) return;
-  axios
-    .post(`http://localhost:5000/article/${route.params.id}/comment`, {
-      text: text.value,
-    })
-    .then((res) => {
-      text.value = "";
-      console.log(res);
-      //сделать компонент уведомлений и отсылать туда инфу по сабмиту
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+  if (errors) return;
+  apiStore.postComment(text);
+  text.value = "";
 };
 </script>

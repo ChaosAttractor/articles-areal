@@ -37,8 +37,7 @@
 </template>
 
 <script setup>
-import axios from "axios";
-import { useRoute } from "vue-router";
+import { useApiStore } from "../stores/apiStore";
 const props = defineProps({
   comment: {
     id: Number,
@@ -49,14 +48,9 @@ const props = defineProps({
   },
 });
 
-const route = useRoute();
+const apiStore = useApiStore();
 
 const remove = (id) => {
-  console.log(id);
-  console.log(route.params.id);
-  axios
-    .delete(`http://localhost:5000/article/${route.params.id}/comment/${id}`)
-    .then((res) => console.log(res))
-    .catch((err) => console.log(err));
+  apiStore.deleteComment(id);
 };
 </script>
