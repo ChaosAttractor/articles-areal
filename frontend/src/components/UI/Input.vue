@@ -30,6 +30,10 @@ const props = defineProps({
     String,
     default: "",
   },
+  name: {
+    String,
+    default: "",
+  },
 });
 
 const resizeTextarea = (e) => {

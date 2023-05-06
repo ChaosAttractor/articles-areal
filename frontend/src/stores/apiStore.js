@@ -11,21 +11,32 @@ export const useApiStore = defineStore("api", () => {
   const article = ref({});
   const articles = ref({});
   const comments = ref({});
+  const filteredComments = ref({});
 
   const getArticle = () => {
     axios
       .get(`http://localhost:5000/article/${route.params.id}`)
       .then((res) => (article.value = res.data));
   };
+
   const getArticles = () => {
     axios
       .get("http://localhost:5000/articles")
       .then((res) => (articles.value = res.data));
   };
+
   const getCommentsArticle = () => {
     axios
       .get(`http://localhost:5000/article/${route.params.id}/comments`)
       .then((res) => (comments.value = res.data));
+  };
+
+  const getAllBetweenDates = (dates) => {
+    axios
+      .get(
+        `http://localhost:5000/analytic/comments?dateFrom=${dates.dateFrom}&dateTo=${dates.dateTo}`
+      )
+      .then((res) => (filteredComments.value = res.data));
   };
 
   const postArticle = (title, desc) => {
@@ -41,6 +52,7 @@ export const useApiStore = defineStore("api", () => {
         appStore.notificationCreate("Не удалось создать статью", "fail");
       });
   };
+
   const postComment = (text) => {
     axios
       .post(`http://localhost:5000/article/${route.params.id}/comment`, {
@@ -71,6 +83,7 @@ export const useApiStore = defineStore("api", () => {
         );
       });
   };
+
   const updateArticle = (id, title, desc) => {
     axios
       .patch(`http://localhost:5000/article/${id}`, {
@@ -111,9 +124,11 @@ export const useApiStore = defineStore("api", () => {
     article,
     articles,
     comments,
+    filteredComments,
     getArticle,
     getCommentsArticle,
     getArticles,
+    getAllBetweenDates,
     postArticle,
     postComment,
     updateArticle,

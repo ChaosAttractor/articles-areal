@@ -8,7 +8,7 @@ const Articles = sequalize.define("articles", {
   desc: { type: DataTypes.TEXT, allowNull: false },
 });
 
-Articles.hasMany(Comments);
+Articles.hasMany(Comments, { onDelete: "cascade", hooks: true });
 Comments.belongsTo(Articles);
 
 export { Articles };

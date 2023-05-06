@@ -5,10 +5,7 @@
     </p>
     <Article :article="apiStore.article" />
     <CommentForm />
-    <Modal>
-      <EditComment v-if="appStore.showModalComment" />
-      <EditArticle v-if="appStore.showModalArticle" />
-    </Modal>
+
     <Comment
       v-for="comment in apiStore.comments"
       :key="comment.id"

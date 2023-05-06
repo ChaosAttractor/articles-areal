@@ -11,7 +11,7 @@
         {{ props.comment.text }}
       </p>
     </div>
-    <div class="flex gap-[10px]">
+    <div class="flex gap-[10px]" v-if="!route.query">
       <Edit @click="edit(props.comment)" />
       <Delete @click="remove(props.comment.id)" />
     </div>
@@ -19,6 +19,7 @@
 </template>
 
 <script setup>
+import { useRoute } from "vue-router";
 import { useApiStore } from "../stores/apiStore";
 import { useAppStore } from "../stores/appStore";
 import Delete from "./UI/Delete.vue";
@@ -32,6 +33,8 @@ const props = defineProps({
     articleId: String,
   },
 });
+
+const route = useRoute();
 
 const apiStore = useApiStore();
 const appStore = useAppStore();
