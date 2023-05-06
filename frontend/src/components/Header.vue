@@ -23,6 +23,7 @@ const router = useRouter();
 const dropdown = ref([
   { id: 1, title: "Список статей", link: "/" },
   { id: 2, title: "Создать статью", link: "/create" },
+  { id: 3, title: "Комментарии за определенный период", link: "/analytic" },
 ]);
 
 const home = () => {

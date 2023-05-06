@@ -4,7 +4,7 @@
       <div
         v-if="appStore.showModal"
         @click="close"
-        class="fixed top-0 left-0 right-0 bottom-0 z-[999] bg-modal-bg flex justify-center items-center"
+        class="fixed top-0 left-0 right-0 bottom-0 z-[50] bg-modal-bg flex justify-center items-center"
       >
         <Transition name="slide" appear>
           <div

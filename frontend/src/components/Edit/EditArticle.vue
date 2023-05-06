@@ -74,7 +74,12 @@ const v = useVuelidate(rules, {
 const submit = () => {
   v.value.$touch();
   let errors = v.value.$errors.length;
-  if (errors) return;
+  if (errors) {
+    for (let el of v.value.$errors) {
+      appStore.notificationCreate(el.$message, "fail");
+    }
+    return;
+  }
   apiStore.updateArticle(
     appStore.editArticle.id,
     appStore.editArticle.title,

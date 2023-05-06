@@ -58,7 +58,12 @@ const v = useVuelidate(rules, {
 const submit = () => {
   v.value.$touch();
   let errors = v.value.$errors.length;
-  if (errors) return;
+  if (errors) {
+    for (let el of v.value.$errors) {
+      appStore.notificationCreate(el.$message, "fail");
+    }
+    return;
+  }
   apiStore.updateComment(appStore.editComment.id, appStore.editComment.text);
   appStore.showModal = false;
   appStore.showModalComment = false;

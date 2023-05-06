@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from "vue-router";
 import ArticleListView from "../views/ArticleListView.vue";
 import ArticleView from "../views/ArticleView.vue";
 import CreateArticleView from "../views/CreateArticleView.vue";
+import AnalyticView from "../views/AnalyticView.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -17,6 +18,14 @@ const router = createRouter({
     {
       path: "/article/:id",
       component: ArticleView,
+    },
+    {
+      path: "/analytic",
+      component: AnalyticView,
+    },
+    {
+      path: "/:catchAll(.*)",
+      component: ArticleListView,
     },
   ],
 });

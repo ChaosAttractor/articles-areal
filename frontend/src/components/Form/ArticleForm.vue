@@ -22,7 +22,9 @@ import { ref, computed } from "vue";
 import useVuelidate from "@vuelidate/core";
 import { helpers, minLength, maxLength, required } from "@vuelidate/validators";
 import { useApiStore } from "../../stores/apiStore";
+import { useAppStore } from "../../stores/appStore";
 
+const appStore = useAppStore();
 const apiStore = useApiStore();
 
 const title = ref("");
@@ -64,7 +66,12 @@ const v = useVuelidate(rules, {
 const submit = () => {
   v.value.$touch();
   let errors = v.value.$errors.length;
-  if (errors) return;
+  if (errors) {
+    for (let el of v.value.$errors) {
+      appStore.notificationCreate(el.$message, "fail");
+    }
+    return;
+  }
   apiStore.postArticle(title, desc);
   title.value = "";
   desc.value = "";

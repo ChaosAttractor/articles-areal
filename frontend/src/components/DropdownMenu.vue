@@ -16,7 +16,7 @@
         <RouterLink
           :to="item.link"
           @click="dropdownActive"
-          class="bg-navi-form w-[200px] h-[30px] pl-[5px] flex items-center border-b border-gray-line text-white text-[18px]"
+          class="bg-navi-form w-[200px] min-h-[30px] pl-[5px] flex items-center border-b border-gray-line text-white text-[18px]"
           >{{ item.title }}</RouterLink
         >
       </li>

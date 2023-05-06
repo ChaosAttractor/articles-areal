@@ -2,9 +2,11 @@ import { ref } from "vue";
 import { defineStore } from "pinia";
 import { useRoute } from "vue-router";
 import axios from "axios";
+import { useAppStore } from "./appStore";
 
 export const useApiStore = defineStore("api", () => {
   const route = useRoute();
+  const appStore = useAppStore();
 
   const article = ref({});
   const articles = ref({});
@@ -33,11 +35,10 @@ export const useApiStore = defineStore("api", () => {
         desc: desc.value,
       })
       .then((res) => {
-        console.log(res);
-        //сделать компонент уведомлений и отсылать туда инфу по сабмиту
+        appStore.notificationCreate("Статья создана", "success");
       })
       .catch((err) => {
-        console.log(err);
+        appStore.notificationCreate("Не удалось создать статью", "fail");
       });
   };
   const postComment = (text) => {
@@ -47,11 +48,10 @@ export const useApiStore = defineStore("api", () => {
       })
       .then((res) => {
         getCommentsArticle();
-        console.log(res);
-        //сделать компонент уведомлений и отсылать туда инфу по сабмиту
+        appStore.notificationCreate("Комментарий создан", "success");
       })
       .catch((err) => {
-        console.log(err);
+        appStore.notificationCreate("Не удалось создать комментарий", "fail");
       });
   };
 
@@ -61,10 +61,15 @@ export const useApiStore = defineStore("api", () => {
         text: text,
       })
       .then((res) => {
-        console.log(res);
+        appStore.notificationCreate("Комментарий отредактирован", "success");
         getCommentsArticle();
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        appStore.notificationCreate(
+          "Не удалось отредактировать комментарий",
+          "fail"
+        );
+      });
   };
   const updateArticle = (id, title, desc) => {
     axios
@@ -73,24 +78,33 @@ export const useApiStore = defineStore("api", () => {
         desc: desc,
       })
       .then((res) => {
-        console.log(res);
+        appStore.notificationCreate("Статья обновлена", "success");
         getCommentsArticle();
       })
-      .catch((err) => console.log(err));
+      .catch((err) =>
+        appStore.notificationCreate("Не удалось обновить статью", "fail")
+      );
   };
 
   const deleteArticle = (id) => {
     axios
       .delete(`http://localhost:5000/article/${id}`)
-      .then((res) => console.log(res))
-      .catch((err) => console.log(err));
+      .then((res) => appStore.notificationCreate("Статья удалена", "success"))
+      .catch((err) =>
+        appStore.notificationCreate("Не удалось удалить статью", "fail")
+      );
   };
 
   const deleteComment = (id) => {
     axios
       .delete(`http://localhost:5000/article/${route.params.id}/comment/${id}`)
-      .then((res) => getCommentsArticle())
-      .catch((err) => console.log(err));
+      .then((res) => {
+        getCommentsArticle();
+        appStore.notificationCreate("Комментарий удален", "success");
+      })
+      .catch((err) =>
+        appStore.notificationCreate("Не удалось удалить комментарий", "fail")
+      );
   };
 
   return {

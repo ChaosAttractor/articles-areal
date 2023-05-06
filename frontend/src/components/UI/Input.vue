@@ -41,3 +41,9 @@ const updateValue = (e) => {
   emit("update:value", e.target.value);
 };
 </script>
+
+<style scoped>
+input[type="date"]::-webkit-calendar-picker-indicator {
+  @apply invert text-[24px];
+}
+</style>
