@@ -14,12 +14,12 @@
 </template>
 
 <script setup>
-import Input from "./UI/Input.vue";
-import Button from "./UI/Button.vue";
+import Input from "../UI/Input.vue";
+import Button from "../UI/Button.vue";
 import { ref, computed } from "vue";
 import useVuelidate from "@vuelidate/core";
 import { helpers, minLength, maxLength, required } from "@vuelidate/validators";
-import { useApiStore } from "../stores/apiStore";
+import { useApiStore } from "../../stores/apiStore";
 
 const apiStore = useApiStore();
 

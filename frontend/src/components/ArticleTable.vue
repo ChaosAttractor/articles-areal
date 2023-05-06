@@ -32,7 +32,7 @@
             </p>
           </td>
           <td class="px-[15px]">
-            {{ new Date(article.createdAt).toLocaleDateString() }}
+            {{ new Date(article.updatedAt).toLocaleDateString() }}
           </td>
           <td>
             <button
@@ -42,11 +42,20 @@
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 576 512"
+                viewBox="0 0 512 512"
                 class="w-[32px] h-[32px] self-center cursor-pointer fill-white"
               >
                 <path
-                  d="M384 480h48c11.4 0 21.9-6 27.6-15.9l112-192c5.8-9.9 5.8-22.1 .1-32.1S555.5 224 544 224H144c-11.4 0-21.9 6-27.6 15.9L48 357.1V96c0-8.8 7.2-16 16-16H181.5c4.2 0 8.3 1.7 11.3 4.7l26.5 26.5c21 21 49.5 32.8 79.2 32.8H416c8.8 0 16 7.2 16 16v32h48V160c0-35.3-28.7-64-64-64H298.5c-17 0-33.3-6.7-45.3-18.7L226.7 50.7c-12-12-28.3-18.7-45.3-18.7H64C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H87.7 384z"
+                  d="M0 96C0 60.7 28.7 32 64 32H196.1c19.1 0 37.4 7.6 50.9 21.1L289.9 96H448c35.3 0 64 28.7 64 64V416c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V96zM64 80c-8.8 0-16 7.2-16 16V416c0 8.8 7.2 16 16 16H448c8.8 0 16-7.2 16-16V160c0-8.8-7.2-16-16-16H286.6c-10.6 0-20.8-4.2-28.3-11.7L213.1 87c-4.5-4.5-10.6-7-17-7H64z"
+                />
+              </svg>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="-25 -30 512 512"
+                class="w-[24px] h-[24px] self-center cursor-pointer fill-white absolute 0 rotate-6 hover:rotate-0 hover:scale-125 hover:translate-x-[-3px] hover:translate-y-[3px] hover:w-[32px] hover:fill-green-400 duration-200 ease-in-out"
+              >
+                <path
+                  d="M64 480H448c35.3 0 64-28.7 64-64V160c0-35.3-28.7-64-64-64H288c-10.1 0-19.6-4.7-25.6-12.8L243.2 57.6C231.1 41.5 212.1 32 192 32H64C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64z"
                 />
               </svg>
             </button>

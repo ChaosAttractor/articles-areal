@@ -18,8 +18,9 @@
 import { onMounted } from "vue";
 import { useApiStore } from "../stores/apiStore";
 import Article from "../components/Article.vue";
-import CommentForm from "../components/CommentForm.vue";
+
 import Comment from "../components/Comment.vue";
+import CommentForm from "../components/Create/CommentForm.vue";
 
 const apiStore = useApiStore();
 

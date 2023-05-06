@@ -8,5 +8,5 @@
 </template>
 
 <script setup>
-import ArticleForm from "../components/ArticleForm.vue";
+import ArticleForm from "../components/Create/ArticleForm.vue";
 </script>
