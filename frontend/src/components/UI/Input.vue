@@ -5,11 +5,11 @@
     :type="type"
     :value="value"
     @input="updateValue"
-    class="w-[300px] h-[50px] rounded-[16px] placeholder:text-placeholder text-white font-montserrat text-[18px] bg-navi-form focus:outline-none px-[10px]"
+    class="w-[300px] h-[50px] rounded-[16px] placeholder:text-placeholder text-white font-montserrat text-[18px] bg-navi-form focus:outline-none px-[10px] transition duration-200 ease-in-out"
   />
   <textarea
     v-else
-    class="w-[300px] min-h-[50px] rounded-[16px] placeholder:text-placeholder pt-[10px] text-white font-montserrat text-[18px] bg-navi-form focus:outline-none px-[10px] overflow-y-hidden"
+    class="w-[300px] min-h-[50px] rounded-[16px] placeholder:text-placeholder pt-[10px] text-white font-montserrat text-[18px] bg-navi-form focus:outline-none px-[10px] overflow-y-hidden transition duration-200 ease-in-out"
     :placeholder="props.placeholder"
     :value="value"
     @input="updateValue"

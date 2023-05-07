@@ -4,10 +4,12 @@
       Комментарии за определнный период
     </p>
     <AnalyticForm class="mb-[30px]" />
-    <ArticleWithComment
-      v-for="block in apiStore.filteredComments"
-      :block="block"
-    />
+    <div class="mb-[30px]">
+      <ArticleWithComment
+        v-for="block in apiStore.filteredComments"
+        :block="block"
+      />
+    </div>
   </div>
 </template>
 

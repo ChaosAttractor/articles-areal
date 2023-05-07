@@ -10,7 +10,9 @@
     <p class="uppercase text-[24px] border-b border-gray-line">
       {{ props.article.title }}
     </p>
-    <p>{{ props.article.desc }}</p>
+    <p class="break-words">
+      {{ props.article.desc }}
+    </p>
   </div>
 
   <div

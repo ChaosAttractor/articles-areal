@@ -8,7 +8,12 @@
       <p>До</p>
       <Input :type="'date'" :name="'dateTo'" v-model:value="dateTo" />
     </div>
-    <Button :type="'submit'" :title="'Отправить'" class="self-end mt-[20px]" />
+    <Button
+      :type="'submit'"
+      :title="'Отправить'"
+      class="self-end mt-[20px]"
+      :class="{ 'scale-95': clicked }"
+    />
   </form>
 </template>
 
@@ -16,18 +21,21 @@
 import Input from "../UI/Input.vue";
 import Button from "../UI/Button.vue";
 import { ref } from "vue";
-import { useRoute, useRouter } from "vue-router";
+import { useRouter } from "vue-router";
 import { useApiStore } from "../../stores/apiStore";
+import { useEventStore } from "../../stores/eventStore";
 
 const apiStore = useApiStore();
+const eventStore = useEventStore();
 
-const route = useRoute();
 const router = useRouter();
 
-const dateFrom = ref("");
-const dateTo = ref("");
+const dateFrom = ref("2023-01-01");
+const dateTo = ref("2024-01-01");
+const clicked = ref(false);
 
 const submit = () => {
+  eventStore.onClick(clicked, 100);
   apiStore.getAllBetweenDates([dateFrom.value, dateTo.value]);
   router.push({ query: { dateFrom: dateFrom.value, dateTo: dateTo.value } });
 };

@@ -102,7 +102,10 @@ export const useApiStore = defineStore("api", () => {
   const deleteArticle = (id) => {
     axios
       .delete(`http://localhost:5000/article/${id}`)
-      .then((res) => appStore.notificationCreate("Статья удалена", "success"))
+      .then((res) => {
+        appStore.notificationCreate("Статья удалена", "success");
+        getArticles();
+      })
       .catch((err) =>
         appStore.notificationCreate("Не удалось удалить статью", "fail")
       );

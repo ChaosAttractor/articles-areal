@@ -7,7 +7,7 @@
         {{ new Date(props.comment.updatedAt).toLocaleDateString() }}
         {{ new Date(props.comment.updatedAt).toLocaleTimeString() }}
       </p>
-      <p>
+      <p class="break-all">
         {{ props.comment.text }}
       </p>
     </div>

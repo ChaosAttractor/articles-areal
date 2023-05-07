@@ -18,6 +18,7 @@
       :type="'submit'"
       :title="btnTitle"
       class="self-end my-[30px] mr-[10px] w-[200px]"
+      :class="{ 'scale-95': clicked }"
       @click="submit"
     />
   </form>
@@ -31,12 +32,15 @@ import useVuelidate from "@vuelidate/core";
 import { helpers, minLength, maxLength, required } from "@vuelidate/validators";
 import { useApiStore } from "../../stores/apiStore";
 import { useAppStore } from "../../stores/appStore";
+import { useEventStore } from "../../stores/eventStore";
 
 const apiStore = useApiStore();
 const appStore = useAppStore();
+const eventStore = useEventStore();
 
 const placeholder = ref("Редактирование...");
 const btnTitle = ref("Отредактировать");
+const clicked = ref(false);
 
 const rules = computed(() => ({
   appStore: {
@@ -50,7 +54,7 @@ const rules = computed(() => ({
           `Максимальная длина: 30 символов`,
           maxLength(30)
         ),
-        required,
+        required: helpers.withMessage(`Заполните поле название`, required),
       },
       desc: {
         minLength: helpers.withMessage(
@@ -61,7 +65,7 @@ const rules = computed(() => ({
           `Максимальная длина: 2000 символов`,
           maxLength(2000)
         ),
-        required,
+        required: helpers.withMessage(`Заполните поле текст`, required),
       },
     },
   },
@@ -72,6 +76,7 @@ const v = useVuelidate(rules, {
 });
 
 const submit = () => {
+  eventStore.onClick(clicked, 100);
   v.value.$touch();
   let errors = v.value.$errors.length;
   if (errors) {
