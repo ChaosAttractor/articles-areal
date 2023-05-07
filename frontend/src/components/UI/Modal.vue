@@ -6,7 +6,7 @@
         @click="close"
         class="fixed top-0 left-0 right-0 bottom-0 z-[50] bg-modal-bg flex justify-center items-center"
       >
-        <Transition name="slide" appear>
+        <Transition name="pop" appear>
           <div
             @click.stop
             class="w-[500px] min-h-[50px] text-black bg-navi-form rounded-[16px]"
@@ -44,12 +44,12 @@ const close = () => {
   @apply transition-opacity duration-300;
 }
 
-.slide-enter-from,
-.slide-leave-to {
-  @apply opacity-0 translate-x-full;
+.pop-enter-from,
+.pop-leave-to {
+  @apply opacity-0 scale-150;
 }
-.slide-enter-active,
-.slide-leave-active {
-  @apply transition-transform duration-300;
+.pop-enter-active,
+.pop-leave-active {
+  @apply transition-all duration-300;
 }
 </style>
