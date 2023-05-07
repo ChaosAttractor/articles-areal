@@ -28,6 +28,9 @@ cd backend
 ```
 npm i
 ```
+```
+npm audit fix
+```
 
 ```
 cd ..
@@ -39,6 +42,9 @@ cd frontend
 
 ```
 npm i
+```
+```
+npm audit fix
 ```
 
 ## Миграция
