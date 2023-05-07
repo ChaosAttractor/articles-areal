@@ -28,7 +28,7 @@ const dateFrom = ref("");
 const dateTo = ref("");
 
 const submit = () => {
+  apiStore.getAllBetweenDates([dateFrom.value, dateTo.value]);
   router.push({ query: { dateFrom: dateFrom.value, dateTo: dateTo.value } });
-  apiStore.getAllBetweenDates(route.query);
 };
 </script>

@@ -15,6 +15,7 @@
       <li v-for="item in props.dropdown" :key="item.id">
         <RouterLink
           :to="item.link"
+          replace
           @click="dropdownActive"
           class="bg-navi-form w-[200px] min-h-[30px] pl-[5px] flex items-center border-b border-gray-line text-white text-[18px]"
           >{{ item.title }}</RouterLink
@@ -26,6 +27,7 @@
 
 <script setup>
 import { ref } from "vue";
+import { useRoute, useRouter } from "vue-router";
 
 const props = defineProps({
   dropdown: {
@@ -34,6 +36,9 @@ const props = defineProps({
     link: String,
   },
 });
+
+const router = useRouter();
+const route = useRoute();
 
 const isVisible = ref(false);
 

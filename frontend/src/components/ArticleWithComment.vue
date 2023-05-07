@@ -1,8 +1,18 @@
 <template>
-  <Article :article="props.block.article" class="my-[20px]" />
-  <Comment :comment="props.block" class="mb-[20px]" />
-  <div class="text-white">
-    <p class="text-white"></p>
+  <div class="flex flex-col relative">
+    <Comment
+      :comment="props.block"
+      :edit="'false'"
+      class="my-[20px] z-10 relative"
+    />
+    <Article
+      :article="props.block.article"
+      :type="'mini'"
+      class="z-10 self-end"
+    />
+    <div
+      class="w-[400px] h-[100px] border-b-[10px] border-l-[10px] border-navi-form rounded-[16px] absolute left-[300px] top-[50px]"
+    ></div>
   </div>
 </template>
 

@@ -3,7 +3,7 @@
     <p class="text-white font-montserrat font-bold text-[24px] my-[10px]">
       Просмотр статьи
     </p>
-    <Article :article="apiStore.article" />
+    <Article :article="apiStore.article" :type="'full'" />
     <CommentForm />
 
     <Comment
@@ -19,14 +19,9 @@
 import { onMounted } from "vue";
 import { useApiStore } from "../stores/apiStore";
 import Article from "../components/Article.vue";
-import Modal from "../components/UI/Modal.vue";
-import EditComment from "../components/Edit/EditComment.vue";
 import Comment from "../components/Comment.vue";
 import CommentForm from "../components/Form/CommentForm.vue";
-import EditArticle from "../components/Edit/EditArticle.vue";
-import { useAppStore } from "../stores/appStore";
 
-const appStore = useAppStore();
 const apiStore = useApiStore();
 
 onMounted(() => {

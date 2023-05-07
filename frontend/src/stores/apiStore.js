@@ -34,7 +34,7 @@ export const useApiStore = defineStore("api", () => {
   const getAllBetweenDates = (dates) => {
     axios
       .get(
-        `http://localhost:5000/analytic/comments?dateFrom=${dates.dateFrom}&dateTo=${dates.dateTo}`
+        `http://localhost:5000/analytic/comments?dateFrom=${dates[0]}&dateTo=${dates[1]}`
       )
       .then((res) => (filteredComments.value = res.data));
   };

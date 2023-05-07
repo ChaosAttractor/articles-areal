@@ -11,7 +11,7 @@
         {{ props.comment.text }}
       </p>
     </div>
-    <div class="flex gap-[10px]" v-if="!route.query">
+    <div v-if="props.edit == 'true'" class="flex gap-[10px]">
       <Edit @click="edit(props.comment)" />
       <Delete @click="remove(props.comment.id)" />
     </div>
@@ -31,6 +31,10 @@ const props = defineProps({
     createdAt: String,
     updatedAt: String,
     articleId: String,
+  },
+  edit: {
+    type: String,
+    default: "true",
   },
 });
 

@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-col items-center">
-    <p class="text-white font-montserrat font-bold text-[24px]">
+    <p class="text-white font-montserrat font-bold text-[24px] mt-[20px]">
       Комментарии за определнный период
     </p>
     <AnalyticForm class="mb-[30px]" />
@@ -22,8 +22,7 @@ const route = useRoute();
 const apiStore = useApiStore();
 
 onMounted(() => {
-  if (route.query) {
-    apiStore.getAllBetweenDates(route.query);
-  }
+  const arr = [route.query.dateFrom, route.query.dateTo];
+  apiStore.getAllBetweenDates(arr);
 });
 </script>
